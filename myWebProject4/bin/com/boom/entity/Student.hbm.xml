@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.boom.entity.Student" table="t_student">
+		<id name="sid" column="sid">
+			<generator class="native"></generator>
+		</id>
+		<!--用于版本更新-->
+		<version name="version"></version>
+		<!--配置属性-->
+		<property name="sname" column="sname"></property>
+		<property name="address" column="address"></property>
+	
+		<!--对应集合名称
+		cascade="save-update" 设置保存数据
+		-->
+		<set name="courses" table="STU_COURSE" cascade="save-update,delete">
+		<!--双向维护-->
+		<key column="csid" ></key>
+		<!--体现一对多-->	
+			<many-to-many class="com.boom.entity.Course"  column="c_id"/>
+		</set>
+	</class>
+</hibernate-mapping>
